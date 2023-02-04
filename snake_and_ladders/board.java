@@ -15,20 +15,4 @@ public class board {
         return true;
         return false;
     }
-    // public static void main(String[] args) {
-    //     board brd = new board(1, 100);
-    //     Dice d = new riggedDice();
-    //     snakes sn = new snakes();
-    //     ladders ld = new ladders();
-    //     move mv = new move();
-    //     int val = mv.position(84, 6);
-    //     System.out.println(val);
-    //     HashMap<Integer,Integer> snake = new HashMap<>();
-    //     snake = sn.genSnakes();
-    //     System.out.println(snake);
-    //     HashMap<Integer,Integer> ladder = ld.genLadders();
-    //     System.out.println(ladder);
-    //     // int ch = d.rollADice();
-    //     // System.out.println(ch);
-    // }
 }
