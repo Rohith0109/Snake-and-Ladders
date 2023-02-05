@@ -11,4 +11,11 @@ public class riggedDice implements Dice{
         }
         return num;
     }
+    public void delay(int n){
+        try {
+            Thread.sleep(n*200);
+        } catch (Exception e){
+
+        }
+    }
 }

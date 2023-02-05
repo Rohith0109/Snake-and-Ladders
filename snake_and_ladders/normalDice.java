@@ -11,4 +11,11 @@ public class normalDice implements Dice{
         }
         return choice;
     }
+    public void delay(int n){
+        try {
+            Thread.sleep(n*200);
+        } catch (Exception e){
+
+        }
+    }
 }

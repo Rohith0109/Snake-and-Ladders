@@ -9,11 +9,19 @@ public class move {
         int fin = curr+choice;
         if (snake.containsKey(fin)){
             fin = snake.get(fin);
+            System.out.println("Oh no, you landed on a snake and slid down to "+fin+"!");
         }
-        if (ladder.containsKey(fin))
-        fin = ladder.get(fin);
-        if (fin>100)
+        else if (ladder.containsKey(fin)) {
+            fin = ladder.get(fin);
+            System.out.println("You climbed the ladder and advanced to "+fin+"!");
+        }
+        else if (fin>100) {
+            System.out.println("Looks like you don't have a move");
             return curr;
+        }
+        else{
+            System.out.println("You moved to "+fin);
+        }
         return fin;
     }
 }

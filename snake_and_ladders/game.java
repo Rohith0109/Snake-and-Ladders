@@ -5,19 +5,12 @@ import java.util.Queue;
 import java.util.Scanner;
 import java.util.HashMap;
 
-class player{
-    String name;
-    int pos;
-    player(String name, int pos){
-        this.name = name;
-        this.pos = pos;
-    }
-}
+
 
 public class game {
 
     
-    public static void main(String[] args) {
+    public void startGame() {
         Scanner scan = new Scanner(System.in);
         System.out.print("Enter the no of playes: ");
         int no_of_players = scan.nextInt();
@@ -36,8 +29,15 @@ public class game {
         while (que.size()>1){
             player curr = que.poll();
             int plac = curr.pos;
-            System.out.println(curr.name+ " is initially at "+plac);
+            System.out.println(curr.name+ " is at "+plac);
             int dic = d.rollADice();
+            System.out.print("The dice is rolling. ");
+            for (int i=0;i<4;i++){
+                d.delay(1);
+                System.out.print(". ");
+                if (i==3)
+                    System.out.print("\n");
+            }
             System.out.println("You got "+dic+" on the dice");
             int prev = plac;
             plac = mv.position(plac, dic);
@@ -45,32 +45,31 @@ public class game {
                 int count = 1;
                 if (prev != plac) {
 
-                    while (dic == 6 && count != 3) {
+                    while (dic == 6 && count != 3 && scan.nextLine().equals("")) {
                         dic = d.rollADice();
                         System.out.println("Now you got "+dic+" on the dice");
                         prev = plac;
                         plac = mv.position(plac, dic);
+                        if (brd.isWon(plac)){
+                            System.out.println(curr.name+" won the match");
+                            continue;
+                        }
                         if (dic == 6)
                             count++;
                     }
-                    if (count == 3 && dic == 6)
+                    if (count == 3 && dic == 6) {
+                        System.out.println("You rolled three 6's! Unfortunately, all three 6's have been cancelled and you will not get an extra turn.");
                         plac = plac - 18;
+                        System.out.println("You got back to "+plac);
+                    }
                 }
             }
-            if (plac<prev){
-                System.out.println("Oops! you were caught by a snake");
-            }
-            else if (plac==prev){
-                System.out.println("Looks like you don't have a move");
-            }
-            if (plac> brd.max_boxes)
+            if (plac > brd.max_boxes)
                 plac = prev;
-            //plac = chang;
             if (brd.isWon(plac)){
                 System.out.println(curr.name+" won the match");
                 continue;
             }
-            System.out.println(curr.name+"'s current position is "+plac);
             System.out.println("Press enter to continue. 0 to quit");
             next = scan.nextLine();
             if (next.equals("")){
